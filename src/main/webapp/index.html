@@ -1,0 +1,23 @@
+<div lift="surround?with=base-wrap;at=content">
+  <lift:head>
+    <title lift="Menu.title">lift-extras-example: %*%</title>
+  </lift:head>
+  <div class="jumbotron">
+    <h2>lift-extras-example</h2>
+    <p>
+      <span data-lift="HelloWorld">
+      <span id="avatar"></span> Welcome to your Lift app at <span id="time">Time goes here</span>
+      </span>
+    </p>
+  </div>
+  <div class="row">
+    <h2>Heading</h2>
+    <p>
+      This demonstrates using SnippetExtras to handle errors for you when creating snippets.
+      You can gather data using for comprehensions and if one of them is Empty or Failure,
+      the notices will automatically be displayed to the user instead of the snippet output.
+    </p>
+    <p data-lift="notice.ErrorDivTest.render"></p>
+  </div>
+  <span lift="embed?what=/templates-hidden/parts/footer"></span>
+</div>

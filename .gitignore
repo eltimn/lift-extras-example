@@ -1,0 +1,10 @@
+# sbt
+target/
+
+# sublime-text
+*.sublime-*
+
+# frontend
+node_modules/
+bower_components/
+.frontend/
