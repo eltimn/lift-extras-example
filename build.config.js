@@ -7,7 +7,8 @@ let dirs = {
   "assets": __dirname + "/src/main/assets",
   "tests": __dirname + "/src/test/assets",
   "target": __dirname + "/target/frontend",
-  "bower_components": __dirname + "/bower_components"
+  "bower_components": __dirname + "/bower_components",
+  "webjars": __dirname + "/target/webjars"
 };
 
 module.exports = {
@@ -34,12 +35,12 @@ module.exports = {
       "main": [
         {
           "files": [
-            dirs.bower_components + "/jquery/dist/jquery.min.js",
-            dirs.bower_components + "/bootstrap/dist/js/bootstrap.min.js",
+            dirs.webjars + "/jquery/dist/jquery.min.js",
+            dirs.webjars + "/bootstrap/dist/js/bootstrap.min.js",
             dirs.bower_components + "/angular/angular.min.js",
             dirs.bower_components + "/knockout/dist/knockout.js",
-            dirs.assets + "/vendor/jquery.bsAlerts.min.js",
-            dirs.assets + "/vendor/jquery.bsFormAlerts.min.js"
+            dirs.webjars + "/lift-extras/jquery.bsAlerts.min.js",
+            dirs.webjars + "/lift-extras/jquery.bsFormAlerts.min.js"
           ]
         },
         {
@@ -60,7 +61,7 @@ module.exports = {
         "source": dirs.assets + "/less/styles.less",
         "options": {
           "paths": [
-            dirs.bower_components + "/bootstrap/less",
+            dirs.webjars + "/bootstrap/less",
             dirs.assets + "/vendor/"
           ]
         },
@@ -72,9 +73,9 @@ module.exports = {
     },
     "copy": {
       "bsfonts": {
-        "base": dirs.bower_components + "/bootstrap",
+        "base": dirs.webjars + "/bootstrap",
         "files": [
-          dirs.bower_components + "/bootstrap/fonts/*"
+          dirs.webjars + "/bootstrap/fonts/*"
         ]
       }
     }

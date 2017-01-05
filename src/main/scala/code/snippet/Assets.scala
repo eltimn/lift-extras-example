@@ -22,8 +22,10 @@ object Assets {
         .loadResourceAsString(s"/${assetType}.manifest.json")
         .flatMap { s => tryo(JsonParser.parse(s)) }
       ) match {
-        case Full(jo: JObject) => jo.values.mapValues(_.toString)
-        case _ => Map.empty
+        case Full(jo: JObject) =>
+          jo.values.mapValues(_.toString)
+        case _ =>
+          Map.empty
       }
     }
   }

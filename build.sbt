@@ -7,18 +7,20 @@ organization in ThisBuild := "net.liftmodules"
 liftVersion := "3.0.1"
 liftEdition := liftVersion.value.split('.').take(2).mkString(".")
 
-val jettyVersion = "9.3.8.v20160314"
+val jettyVersion = "9.4.0.v20161208"
 
 libraryDependencies ++= {
   def lv(s: String): String = s"${s}_${liftEdition.value}"
 
   "net.liftweb" %% "lift-webkit" % liftVersion.value ::
   "net.liftweb" %% "lift-record" % liftVersion.value ::
-  "net.liftmodules" %% lv("extras") % "0.7" ::
+  "net.liftmodules" %% lv("extras") % "1.0.0" ::
   "org.eclipse.jetty" % "jetty-server" % jettyVersion ::
   "org.eclipse.jetty" % "jetty-webapp" % jettyVersion ::
   "ch.qos.logback" % "logback-classic" % "1.1.2" ::
   "org.scalatest" %% "scalatest" % "3.0.1" % "test" ::
+  "org.webjars.npm" % "jquery" % "3.1.1" % "provided" ::
+  "org.webjars.npm" % "bootstrap" % "3.3.7" % "provided" ::
   Nil
 }
 
@@ -45,7 +47,7 @@ assetPrepare := {
 }
 
 lazy val start = taskKey[Unit]("Start the app")
-start := reStart.toTask("").dependsOn(assetPrepare).value
+start := reStart.toTask("").dependsOn(webjars, assetPrepare).value
 
 addCommandAlias("stop", "reStop")
 

@@ -121,10 +121,10 @@ gulp.task("default", ["build"], (callback) => {
 
 gulp.task("build", ["js", "less", "copy"]);
 
-gulp.task("dist", ["test"], (callback) => {
+gulp.task("dist", ["clean"], (callback) => {
   runSequence(
-    "clean",
     "build",
+    "test",
     "gzip",
     callback);
 });

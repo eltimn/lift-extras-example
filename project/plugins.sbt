@@ -8,4 +8,4 @@ resolvers += Resolver.url(
   url("http://dl.bintray.com/eltimn/sbt-plugins"))(
   Resolver.ivyStylePatterns)
 
-addSbtPlugin("com.eltimn" % "sbt-frontend" % "0.1.2-9a0178f587142b9620b39d6a55cc2f5b65017be6")
+addSbtPlugin("com.eltimn" % "sbt-frontend" % "0.2.1")

@@ -122,10 +122,7 @@ object WebApp extends Loggable {
       EnumSet.allOf(classOf[DispatcherType])
     )
 
-    context
-      .getSessionHandler
-      .getSessionManager
-      .setMaxInactiveInterval(sessionTimeoutSeconds)
+    context.getSessionHandler.setMaxInactiveInterval(sessionTimeoutSeconds)
 
     context
   }
