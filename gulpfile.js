@@ -79,23 +79,27 @@ function lessTask(name) {
   const filterNonMinified = filter(["**", "!**/*.min.css"], {restore: true});
 
   var lessOpts = bundle.options || {};
+  var queue = new streamqueue({ objectMode: true });
 
-  var lessPipeline =
-    gulp.src(bundle.source)
-      .pipe(less(lessOpts))
-      .pipe(gulpif(argv.dist, cleanCSS()))
+  if ("source" in bundle) {
+    queue.queue(
+      gulp.src(bundle.source)
+        .pipe(less(lessOpts))
+        .pipe(gulpif(argv.dist, cleanCSS()))
+    );
+  }
 
-  var depsPipeline =
-    gulp.src(bundle.deps)
-      .pipe(gulpif(argv.dist, filterNonMinified))
-      .pipe(gulpif(argv.dist, cleanCSS()))
-      .pipe(gulpif(argv.dist, filterNonMinified.restore))
+  if ("deps" in bundle) {
+    queue.queue(
+      gulp.src(bundle.deps)
+        .pipe(gulpif(argv.dist, filterNonMinified))
+        .pipe(gulpif(argv.dist, cleanCSS()))
+        .pipe(gulpif(argv.dist, filterNonMinified.restore))
+    );
+  }
 
   return [
-    streamqueue({ objectMode: true },
-      depsPipeline,
-      lessPipeline
-    ),
+    queue.done(),
     concat(name + ".css"),
     gulpif(argv.dist, hash()),
     gulp.dest(distDir + "/css"),
@@ -134,21 +138,23 @@ Object.keys(config.bundles.js).forEach((bundle) => {
   gulp.task("js:"+bundle, function(cb) {
     pump(jsTask(bundle), cb);
   });
-})
+
+  gulp.task("js:watch:"+bundle, ["js:"+bundle], reload);
+});
 
 gulp.task("less", Object.keys(config.bundles.less).map((bundle) => "less:"+bundle));
 Object.keys(config.bundles.less).forEach((bundle) => {
   gulp.task("less:"+bundle, function(cb) {
     pump(lessTask(bundle), cb);
   });
-})
+});
 
 gulp.task("copy", Object.keys(config.bundles.copy).map((bundle) => "copy:"+bundle));
 Object.keys(config.bundles.copy).forEach((bundle) => {
   gulp.task("copy:"+bundle, function(cb) {
     pump(copyTask(bundle), cb);
   });
-})
+});
 
 // gzip
 gulp.task("gzip", function(cb) {
@@ -196,12 +202,7 @@ gulp.task("clean-deps", () => {
   return del(config.dirs.bower_components);
 });
 
-
 // watch
-Object.keys(config.bundles.js).forEach((bundle) => {
-  gulp.task("js:watch:"+bundle, ["js:"+bundle], reload);
-})
-
 gulp.task("watch", ["build"], function() {
 
   browserSync.init(config.browserSyncOpts);

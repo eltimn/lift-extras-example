@@ -14,7 +14,7 @@ libraryDependencies ++= {
 
   "net.liftweb" %% "lift-webkit" % liftVersion.value ::
   "net.liftweb" %% "lift-record" % liftVersion.value ::
-  "net.liftmodules" %% lv("extras") % "1.0.0" ::
+  "net.liftmodules" %% lv("extras") % "1.0.1" ::
   "org.eclipse.jetty" % "jetty-server" % jettyVersion ::
   "org.eclipse.jetty" % "jetty-webapp" % jettyVersion ::
   "ch.qos.logback" % "logback-classic" % "1.1.2" ::

@@ -1,6 +1,9 @@
 // source: http://addyosmani.com/blog/essential-js-namespacing/
-(function(window) {
+(function(window, $) {
   "use strict";
+
+  $.fn.bsAlerts.defaults.usebullets = false;
+
   window.App = (function() {
 
     // the instance to return
@@ -36,4 +39,8 @@
 
     return inst;
   }());
-})(this);
+
+  $(document).ready(function () {
+    window.App.init();
+  });
+})(this, jQuery);
