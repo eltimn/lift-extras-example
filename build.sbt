@@ -1,25 +1,25 @@
 import ExampleKeys.{liftEdition, liftVersion}
 
-scalaVersion := "2.12.1"
+scalaVersion := "2.12.4"
 scalacOptions ++= Seq("-unchecked", "-deprecation")
 parallelExecution in Test := false
 organization in ThisBuild := "net.liftmodules"
-liftVersion := "3.0.1"
+liftVersion := "3.2.0"
 liftEdition := liftVersion.value.split('.').take(2).mkString(".")
 
-val jettyVersion = "9.4.0.v20161208"
+val jettyVersion = "9.4.8.v20171121"
 
 libraryDependencies ++= {
   def lv(s: String): String = s"${s}_${liftEdition.value}"
 
   "net.liftweb" %% "lift-webkit" % liftVersion.value ::
   "net.liftweb" %% "lift-record" % liftVersion.value ::
-  "net.liftmodules" %% lv("extras") % "1.0.1" ::
+  "net.liftmodules" %% lv("extras") % "1.1.1" ::
   "org.eclipse.jetty" % "jetty-server" % jettyVersion ::
   "org.eclipse.jetty" % "jetty-webapp" % jettyVersion ::
-  "ch.qos.logback" % "logback-classic" % "1.1.2" ::
+  "ch.qos.logback" % "logback-classic" % "1.2.3" ::
   "org.scalatest" %% "scalatest" % "3.0.1" % "test" ::
-  "org.webjars.npm" % "jquery" % "3.1.1" % "provided" ::
+  "org.webjars.npm" % "jquery" % "3.3.1" % "provided" ::
   "org.webjars.npm" % "bootstrap" % "3.3.7" % "provided" ::
   Nil
 }

@@ -43,7 +43,7 @@ object AngularExample extends SnippetHelper with Loggable {
     }
 
     val funcs = JsObj(
-      "sendSuccess" -> JsExtras.AjaxCallbackAnonFunc(sendSuccess),
+      "sendSuccess" -> JsExtras.AjaxCallbackAnonFunc(sendSuccess _),
       "saveForm" -> JsExtras.JsonCallbackAnonFunc(saveForm)
     )
     val onload =

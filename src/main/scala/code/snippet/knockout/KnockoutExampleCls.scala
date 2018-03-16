@@ -54,8 +54,8 @@ object KnockoutExampleCls extends SnippetHelper with Loggable {
       * Initialize the knockout view model, passing it the anonymous functions
       */
     val onload: JsCmd = koClass.init(
-      JsExtras.AjaxCallbackAnonFunc(sendSuccess),
-      JsExtras.AjaxCallbackAnonFunc(sendError),
+      JsExtras.AjaxCallbackAnonFunc(sendSuccess _),
+      JsExtras.AjaxCallbackAnonFunc(sendError _),
       JsExtras.JsonCallbackAnonFunc(saveForm)
     ) & Call("""$("#notice-alerts").bsAlerts""", initData)
 

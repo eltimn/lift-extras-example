@@ -117,6 +117,6 @@ object FormsTestAjax extends SnippetHelper {
     "name=info_count" #> SHtml.selectElem[Int](0 to 10, Full(iCount))(iCount = _) &
     "name=title" #> book.title.toForm &
     "name=text" #> book.text.toForm &
-    "name=sub" #> SHtml.hidden(process)
+    "name=sub" #> SHtml.hidden(process _)
   } apply in
 }
